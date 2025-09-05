@@ -1,0 +1,29 @@
+# Git
+.git
+
+# Docker
+.docker
+docker-compose.override.yml
+
+# Environment variables
+.env
+
+# Django logs
+logs/
+*.log
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff
+*.sqlite3
+media/
+staticfiles/
+
+
+# vscode
+.vscode/
+*.swp
+*.swo
