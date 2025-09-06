@@ -1,1 +1,154 @@
 INFO 2025-09-05 11:54:05,579 autoreload 9 281473524314144 Watching for file changes with StatReloader
+INFO 2025-09-05 13:50:58,446 autoreload 9 281473598431264 Watching for file changes with StatReloader
+INFO 2025-09-05 13:51:12,986 basehttp 9 281473431171456 "GET / HTTP/1.1" 200 12068
+INFO 2025-09-05 13:53:14,413 basehttp 9 281473519251840 "GET /admin/ HTTP/1.1" 302 0
+INFO 2025-09-05 13:53:14,435 basehttp 9 281473519251840 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4173
+INFO 2025-09-05 13:53:14,444 basehttp 9 281473519251840 "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+INFO 2025-09-05 13:53:14,445 basehttp 9 281473420685696 "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+INFO 2025-09-05 13:53:14,446 basehttp 9 281473431171456 "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO 2025-09-05 13:53:14,448 basehttp 9 281473420685696 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+INFO 2025-09-05 13:53:14,449 basehttp 9 281473431171456 "GET /static/admin/css/login.css HTTP/1.1" 304 0
+INFO 2025-09-05 13:53:14,491 basehttp 9 281473420685696 "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO 2025-09-05 13:53:14,491 basehttp 9 281473431171456 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+INFO 2025-09-05 13:53:17,919 basehttp 9 281473431171456 "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO 2025-09-05 13:53:17,931 basehttp 9 281473431171456 "GET /admin/ HTTP/1.1" 200 6097
+INFO 2025-09-05 13:53:17,947 basehttp 9 281473431171456 "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+INFO 2025-09-05 13:53:17,992 basehttp 9 281473420685696 "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+INFO 2025-09-05 13:53:17,993 basehttp 9 281473431171456 "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+INFO 2025-09-05 14:01:45,424 autoreload 9 281473598431264 /app/config/celery.py changed, reloading.
+INFO 2025-09-05 14:01:45,721 autoreload 23 281473171042336 Watching for file changes with StatReloader
+INFO 2025-09-05 14:02:35,534 autoreload 23 281473171042336 /app/config/celery.py changed, reloading.
+INFO 2025-09-05 14:02:35,764 autoreload 25 281473698172960 Watching for file changes with StatReloader
+INFO 2025-09-05 14:02:38,878 autoreload 25 281473698172960 /app/config/celery.py changed, reloading.
+INFO 2025-09-05 14:02:39,109 autoreload 27 281472908017696 Watching for file changes with StatReloader
+INFO 2025-09-05 14:05:07,340 autoreload 27 281472908017696 /app/config/celery.py changed, reloading.
+INFO 2025-09-05 14:05:07,688 autoreload 29 281473204473888 Watching for file changes with StatReloader
+INFO 2025-09-05 14:06:30,021 autoreload 29 281473204473888 /app/config/celery.py changed, reloading.
+INFO 2025-09-05 14:06:30,282 autoreload 31 281473660862496 Watching for file changes with StatReloader
+INFO 2025-09-05 14:07:31,288 autoreload 31 281473660862496 /app/config/celery.py changed, reloading.
+INFO 2025-09-05 14:07:31,562 autoreload 33 281473503449120 Watching for file changes with StatReloader
+INFO 2025-09-05 14:09:44,544 autoreload 33 281473503449120 /app/config/celery.py changed, reloading.
+INFO 2025-09-05 14:09:44,877 autoreload 35 281473837338656 Watching for file changes with StatReloader
+INFO 2025-09-05 15:27:04,402 autoreload 35 281473837338656 /app/config/settings.py changed, reloading.
+INFO 2025-09-05 15:27:04,688 autoreload 44 281472947679264 Watching for file changes with StatReloader
+INFO 2025-09-05 15:28:05,553 autoreload 44 281472947679264 /app/apps/common/apps.py changed, reloading.
+INFO 2025-09-05 15:28:05,793 autoreload 47 281473273901088 Watching for file changes with StatReloader
+INFO 2025-09-05 16:34:13,357 autoreload 47 281473273901088 /app/config/settings.py changed, reloading.
+INFO 2025-09-05 16:34:13,661 autoreload 51 281473261457440 Watching for file changes with StatReloader
+INFO 2025-09-05 16:34:15,817 autoreload 51 281473261457440 /app/config/settings.py changed, reloading.
+INFO 2025-09-05 16:34:16,011 autoreload 53 281473813172256 Watching for file changes with StatReloader
+INFO 2025-09-05 16:35:55,785 autoreload 9 281473092780064 Watching for file changes with StatReloader
+INFO 2025-09-05 16:37:09,935 basehttp 9 281473011741056 "GET /admin/ HTTP/1.1" 302 0
+INFO 2025-09-05 16:37:09,957 basehttp 9 281473011741056 "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4173
+INFO 2025-09-05 16:37:09,984 basehttp 9 281472990769536 "GET /static/admin/css/responsive.css HTTP/1.1" 200 16565
+INFO 2025-09-05 16:37:09,984 basehttp 9 281473001255296 "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2808
+INFO 2025-09-05 16:37:09,985 basehttp 9 281472883814784 "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+INFO 2025-09-05 16:37:09,986 basehttp 9 281472894300544 "GET /static/admin/css/login.css HTTP/1.1" 200 951
+INFO 2025-09-05 16:37:09,987 basehttp 9 281472980283776 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+INFO 2025-09-05 16:37:09,988 basehttp 9 281473011741056 "GET /static/admin/css/base.css HTTP/1.1" 200 22120
+INFO 2025-09-05 16:37:09,990 basehttp 9 281473011741056 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+INFO 2025-09-05 16:37:11,771 basehttp 9 281473011741056 "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO 2025-09-05 16:37:11,784 basehttp 9 281473011741056 "GET /admin/ HTTP/1.1" 200 6097
+INFO 2025-09-05 16:37:11,797 basehttp 9 281473011741056 "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+INFO 2025-09-05 16:37:11,846 basehttp 9 281473011741056 "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO 2025-09-05 16:37:11,846 basehttp 9 281472980283776 "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO 2025-09-05 16:37:14,903 basehttp 9 281473011741056 "GET /admin/auth/user/ HTTP/1.1" 200 11306
+INFO 2025-09-05 16:37:14,937 basehttp 9 281472894300544 "GET /static/admin/js/core.js HTTP/1.1" 200 6208
+INFO 2025-09-05 16:37:14,940 basehttp 9 281472990769536 "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9777
+INFO 2025-09-05 16:37:14,942 basehttp 9 281473001255296 "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO 2025-09-05 16:37:14,943 basehttp 9 281472980283776 "GET /static/admin/css/changelists.css HTTP/1.1" 200 6878
+INFO 2025-09-05 16:37:14,949 basehttp 9 281472894300544 "GET /static/admin/js/actions.js HTTP/1.1" 200 8076
+INFO 2025-09-05 16:37:14,952 basehttp 9 281472980283776 "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+INFO 2025-09-05 16:37:14,953 basehttp 9 281472990769536 "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+INFO 2025-09-05 16:37:14,956 basehttp 9 281472894300544 "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+INFO 2025-09-05 16:37:14,959 basehttp 9 281472990769536 "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO 2025-09-05 16:37:14,962 basehttp 9 281473011741056 "GET /admin/jsi18n/ HTTP/1.1" 200 3342
+INFO 2025-09-05 16:37:14,966 basehttp 9 281472883814784 "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+INFO 2025-09-05 16:37:14,967 basehttp 9 281473001255296 "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+INFO 2025-09-05 16:37:14,983 basehttp 9 281473001255296 "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+INFO 2025-09-05 16:37:14,986 basehttp 9 281472883814784 "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO 2025-09-05 16:37:14,986 basehttp 9 281472980283776 "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581
+INFO 2025-09-05 16:37:14,987 basehttp 9 281473011741056 "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+INFO 2025-09-05 16:38:54,864 autoreload 9 281473092780064 /app/config/settings.py changed, reloading.
+INFO 2025-09-05 16:38:55,127 autoreload 24 281473294008352 Watching for file changes with StatReloader
+INFO 2025-09-05 17:24:34,901 autoreload 24 281473294008352 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-05 17:24:35,274 autoreload 26 281473589579808 Watching for file changes with StatReloader
+INFO 2025-09-05 17:31:21,772 autoreload 26 281473589579808 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-05 17:31:22,085 autoreload 28 281473272582176 Watching for file changes with StatReloader
+INFO 2025-09-05 17:31:39,466 autoreload 28 281473272582176 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-05 17:31:39,681 autoreload 30 281472968687648 Watching for file changes with StatReloader
+INFO 2025-09-05 17:34:16,797 autoreload 30 281472968687648 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-05 17:34:17,119 autoreload 32 281473213526048 Watching for file changes with StatReloader
+INFO 2025-09-05 17:35:40,980 autoreload 32 281473213526048 /app/config/settings.py changed, reloading.
+INFO 2025-09-05 17:35:41,262 autoreload 34 281473737244704 Watching for file changes with StatReloader
+INFO 2025-09-05 17:40:36,435 autoreload 9 281472941469728 Watching for file changes with StatReloader
+INFO 2025-09-06 09:19:01,795 autoreload 9 281472941469728 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 09:19:02,106 autoreload 18 281472843546656 Watching for file changes with StatReloader
+INFO 2025-09-06 09:19:54,920 autoreload 18 281472843546656 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 09:19:55,143 autoreload 20 281473772318752 Watching for file changes with StatReloader
+INFO 2025-09-06 09:20:33,717 autoreload 20 281473772318752 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 09:20:33,957 autoreload 22 281473675452448 Watching for file changes with StatReloader
+INFO 2025-09-06 09:21:01,463 autoreload 22 281473675452448 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 09:21:01,676 autoreload 24 281473704595488 Watching for file changes with StatReloader
+INFO 2025-09-06 09:21:23,091 autoreload 24 281473704595488 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 09:21:23,302 autoreload 26 281472823226400 Watching for file changes with StatReloader
+INFO 2025-09-06 09:24:16,791 autoreload 26 281472823226400 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 09:24:17,069 autoreload 28 281473783406624 Watching for file changes with StatReloader
+INFO 2025-09-06 09:26:16,832 autoreload 28 281473783406624 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 09:26:17,061 autoreload 30 281472921923616 Watching for file changes with StatReloader
+INFO 2025-09-06 09:34:30,560 autoreload 30 281472921923616 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 09:34:30,850 autoreload 32 281473422393376 Watching for file changes with StatReloader
+INFO 2025-09-06 09:35:16,561 autoreload 32 281473422393376 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 09:35:16,786 autoreload 34 281473510133792 Watching for file changes with StatReloader
+INFO 2025-09-06 09:35:45,288 autoreload 34 281473510133792 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 09:35:45,504 autoreload 36 281472865808416 Watching for file changes with StatReloader
+INFO 2025-09-06 09:37:24,937 autoreload 36 281472865808416 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 09:37:25,225 autoreload 38 281473486024736 Watching for file changes with StatReloader
+INFO 2025-09-06 09:39:42,236 autoreload 38 281473486024736 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 09:39:42,532 autoreload 40 281473080381472 Watching for file changes with StatReloader
+INFO 2025-09-06 10:25:59,672 autoreload 40 281473080381472 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 10:25:59,955 autoreload 42 281473317068832 Watching for file changes with StatReloader
+INFO 2025-09-06 10:28:36,104 autoreload 42 281473317068832 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 10:28:36,366 autoreload 44 281473618149408 Watching for file changes with StatReloader
+INFO 2025-09-06 10:30:14,793 autoreload 44 281473618149408 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 10:30:15,021 autoreload 46 281473121935392 Watching for file changes with StatReloader
+INFO 2025-09-06 10:30:29,305 autoreload 46 281473121935392 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 10:30:29,543 autoreload 48 281473464651808 Watching for file changes with StatReloader
+INFO 2025-09-06 10:31:21,724 autoreload 48 281473464651808 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 10:31:22,037 autoreload 50 281472828669984 Watching for file changes with StatReloader
+INFO 2025-09-06 10:32:11,063 autoreload 50 281472828669984 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 10:32:11,325 autoreload 52 281472868413472 Watching for file changes with StatReloader
+INFO 2025-09-06 10:41:51,319 autoreload 52 281472868413472 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 10:41:51,635 autoreload 55 281473246490656 Watching for file changes with StatReloader
+INFO 2025-09-06 11:05:30,585 autoreload 9 281473755566112 Watching for file changes with StatReloader
+INFO 2025-09-06 11:11:01,767 autoreload 9 281473755566112 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 11:11:02,085 autoreload 11 281473029431328 Watching for file changes with StatReloader
+INFO 2025-09-06 11:11:37,626 autoreload 11 281473029431328 /app/apps/users/models.py changed, reloading.
+INFO 2025-09-06 11:11:37,893 autoreload 13 281473623699488 Watching for file changes with StatReloader
+INFO 2025-09-06 11:12:26,674 autoreload 13 281473623699488 /app/config/settings.py changed, reloading.
+INFO 2025-09-06 11:12:26,909 autoreload 15 281473389269024 Watching for file changes with StatReloader
+INFO 2025-09-06 11:34:32,744 autoreload 9 281473773015072 Watching for file changes with StatReloader
+INFO 2025-09-06 11:35:30,074 autoreload 9 281473773015072 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 11:35:30,321 autoreload 17 281473649852448 Watching for file changes with StatReloader
+INFO 2025-09-06 11:36:04,117 autoreload 17 281473649852448 /app/apps/tasks/models.py changed, reloading.
+INFO 2025-09-06 11:36:04,366 autoreload 19 281473424052256 Watching for file changes with StatReloader
+INFO 2025-09-06 11:37:57,848 autoreload 19 281473424052256 /app/apps/tasks/models.py changed, reloading.
+INFO 2025-09-06 11:37:58,097 autoreload 23 281473306705952 Watching for file changes with StatReloader
+INFO 2025-09-06 11:38:30,795 autoreload 23 281473306705952 /app/apps/tasks/models.py changed, reloading.
+INFO 2025-09-06 11:38:31,019 autoreload 25 281473731088416 Watching for file changes with StatReloader
+INFO 2025-09-06 11:40:14,003 autoreload 25 281473731088416 /app/apps/tasks/models.py changed, reloading.
+INFO 2025-09-06 11:40:14,332 autoreload 28 281473345007648 Watching for file changes with StatReloader
+INFO 2025-09-06 11:41:29,820 autoreload 28 281473345007648 /app/apps/tasks/models.py changed, reloading.
+INFO 2025-09-06 11:41:30,106 autoreload 31 281472876625952 Watching for file changes with StatReloader
+INFO 2025-09-06 11:42:40,604 autoreload 31 281472876625952 /app/apps/tasks/models.py changed, reloading.
+INFO 2025-09-06 11:42:40,892 autoreload 33 281472876593184 Watching for file changes with StatReloader
+INFO 2025-09-06 11:44:07,106 autoreload 33 281472876593184 /app/apps/tasks/models.py changed, reloading.
+INFO 2025-09-06 11:44:07,351 autoreload 35 281473882722336 Watching for file changes with StatReloader
+INFO 2025-09-06 11:44:59,540 autoreload 35 281473882722336 /app/apps/common/models.py changed, reloading.
+INFO 2025-09-06 11:44:59,808 autoreload 39 281473768808480 Watching for file changes with StatReloader
+INFO 2025-09-06 11:45:13,146 autoreload 39 281473768808480 /app/apps/tasks/models.py changed, reloading.
+INFO 2025-09-06 11:45:13,380 autoreload 41 281473359761440 Watching for file changes with StatReloader
+INFO 2025-09-06 11:46:46,485 autoreload 41 281473359761440 /app/apps/tasks/models.py changed, reloading.
+INFO 2025-09-06 11:46:46,824 autoreload 45 281473488543776 Watching for file changes with StatReloader
+INFO 2025-09-06 11:47:34,943 autoreload 45 281473488543776 /app/apps/tasks/models.py changed, reloading.
+INFO 2025-09-06 11:47:35,201 autoreload 49 281472896741408 Watching for file changes with StatReloader

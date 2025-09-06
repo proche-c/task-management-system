@@ -2,13 +2,26 @@ from __future__ import absolute_import, unicode_literals
 import os
 from celery import Celery
 
-# Establece el módulo de settings de Django
+# Set Django settings module
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 
+# instance of celery
 app = Celery('config')
 
-# Cargar la configuración de Django (celery namespace='CELERY')
+# CLoad Django config (celery namespace='CELERY')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
-# Auto descubrir tareas en apps registradas en INSTALLED_APPS
+#config celery broker, which is the sistem that manage task qeues(redis)
+app.conf.broker_url = os.getenv('CELERY_BROKER_URL', 'redis://redis:6379/0')
+
+# config where celery will save the tasks
+app.conf.result_backend = os.getenv('CELERY_RESULT_BACKEND', 'redis://redis:6379/0')
+
+# define logs format
+app.conf.worker_log_format = '[%(levelname)s/%(processName)s] %(message)s'
+
+# define specific tasks logs format
+app.conf.worker_task_log_format = '[%(levelname)s/%(processName)s] %(task_name)s: %(message)s'
+
+# auto discover tasks at apps at INSTALLED_APPS
 app.autodiscover_tasks()
