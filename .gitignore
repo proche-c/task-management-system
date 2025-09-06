@@ -19,9 +19,9 @@ __pycache__/
 *$py.class
 
 # Django stuff
-*.sqlite3
-media/
+django_backend/media/
 django_backend/staticfiles/
+django_backend/.DS_Store
 
 
 # vscode
