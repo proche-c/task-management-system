@@ -10,7 +10,7 @@ docker-compose.override.yml
 .env
 
 # Django logs
-logs/
+django_backend/logs/
 *.log
 
 # Python cache
@@ -21,7 +21,7 @@ __pycache__/
 # Django stuff
 *.sqlite3
 media/
-staticfiles/
+django_backend/staticfiles/
 
 
 # vscode
