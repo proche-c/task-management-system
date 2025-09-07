@@ -14,10 +14,26 @@ class TaskViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     pagination_class = TasksPagination
 
-    # Filtrado y búsqueda
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    filterset_fields = ['status', 'priority', 'created_by']  # ejemplo de campos filtrables
-    search_fields = ['title', 'description']  # campos donde se puede buscar
+    filterset_fields = ['status', 'priority', 'created_by']
+    search_fields = ['title', 'description']
+
+    def get_queryset(self):
+        include_archived = self.request.query_params.get('include_archived')
+        qs = Task.objects.active().select_related('created_by', 'parent_task').prefetch_related('assigned_to', 'tags')
+        if include_archived == 'true':
+            qs = Task.objects.all()  # incluye todo, archivadas también
+        # filtros extra si quieres
+        status = self.request.query_params.get('status')
+        if status:
+            qs = qs.by_status(status)
+        priority = self.request.query_params.get('priority')
+        if priority:
+            qs = qs.by_priority(priority)
+        search = self.request.query_params.get('search')
+        if search:
+            qs = qs.search(search)
+        return qs
 
     def perform_create(self, serializer):
         # Asigna automáticamente el usuario autenticado como creador

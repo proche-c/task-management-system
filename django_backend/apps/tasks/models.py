@@ -1,4 +1,6 @@
 from apps.users.models import User
+from django.db.models import Q
+from django.utils import timezone
 from django.db import models
 
 class   Tag(models.Model):
@@ -7,6 +9,32 @@ class   Tag(models.Model):
 
     def __str__(self):
         return self.name  
+    
+class TaskQuerySet(models.QuerySet):
+    def active(self):
+        return self.filter(is_archived=False)
+
+    def by_status(self, status):
+        return self.filter(status=status)
+
+    def by_priority(self, priority):
+        return self.filter(priority=priority)
+
+    def overdue(self):
+        return self.filter(due_date__lt=timezone.now(), status__in=['todo', 'in_progress'])
+
+    def search(self, query):
+        return self.filter(Q(title__icontains=query) | Q(description__icontains=query))
+
+class TaskManager(models.Manager):
+    def get_queryset(self):
+        return TaskQuerySet(self.model, using=self._db)
+
+    def active(self):
+        return self.get_queryset().active()
+    
+    def overdue(self):
+        return self.get_queryset().overdue()
 
 STATUS_CHOICES = [
     ("todo", "To Do"),
@@ -22,23 +50,6 @@ PRIORITY_CHOICES = [
     ("critical", "Critical"),
 ]
 
-# class TaskAssignment(models.Model):
-#     task = models.ForeignKey(Task, on_delete=models.CASCADE)
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     assigned_at = models.DateTimeField(auto_now_add=True)
-#     assigned_by = models.ForeignKey(
-#         User,
-#         on_delete=models.SET_NULL,
-#         null=True,
-#         related_name="assignments_made"
-#     )
-#     role = models.CharField(max_length=50, default="contributor")
-
-#     class Meta:
-#         unique_together = ("task", "user")  # evita duplicados
-
-#     def __str__(self):
-#         return f"{self.user.username} -> {self.task.title}"
     
 class Task(models.Model):
     title = models.CharField(max_length=200)
@@ -69,6 +80,8 @@ class Task(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_archived = models.BooleanField(default=False)
+
+    objects = TaskManager()
 
     def __str__(self):
         return self.title
