@@ -23,6 +23,10 @@ class TaskViewSet(viewsets.ModelViewSet):
         # Asigna automáticamente el usuario autenticado como creador
         serializer.save(created_by=self.request.user)
 
+    def perform_update(self, serializer):
+        # Asignar usuario que hace la actualización
+        instance = serializer.save(updated_by=self.request.user)
+
     # POST /api/tasks/{id}/assign/
     @action(detail=True, methods=["post"])
     def assign(self, request, pk=None):
