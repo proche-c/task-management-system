@@ -18,12 +18,15 @@ from django.contrib import admin
 from django.urls import path, include
 from apps.users.api.router import router_auth, router_users
 from apps.tasks.api.router import router_tasks
-from apps.users.views import UserLoginView
+from apps.users.views import UserLoginView, UserLogoutView
+from apps.tasks.views import TaskListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router_auth.urls)),
     path('api/', include(router_users.urls)),
     path('api/', include(router_tasks.urls)),
-    path('login/', UserLoginView.as_view(), name="login")
+    path('login/', UserLoginView.as_view(), name="login"),
+    path('logout/', UserLogoutView.as_view(), name='logout'),
+    path('tasks/', TaskListView.as_view(), name="tasks_list")
 ]

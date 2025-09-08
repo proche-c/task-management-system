@@ -2,9 +2,132 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tasks</title>
+    <title>Task List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .task-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+        .status-todo { color: orange; }
+        .status-in_progress { color: blue; }
+        .status-done { color: green; }
+        .status-overdue { color: red; }
+        .logout-btn {
+            display: block;
+            margin: 20px auto 0;
+            padding: 10px 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Esto es Task</h1>
+    <h1>Task List</h1>
+    <div class="task-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+                    <th>Due Date</th>
+                    <th>Created By</th>
+                    <th>Assigned To</th>
+                </tr>
+            </thead>
+            <tbody id="tasks-table-body">
+                <tr><td colspan="6">Loading tasks...</td></tr>
+            </tbody>
+        </table>
+        <form method="post" action="/logout/">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
+
+    <script>
+        // Endpoint de la API
+        const apiUrl = 'http://localhost:8000/api/tasks/';
+
+        // Obtener la cookie de sesión para enviar con la petición
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.startsWith(name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        const csrftoken = getCookie('csrftoken');
+
+        // Fetch tasks
+        fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken
+            },
+            credentials: 'include'  // importante para enviar la cookie de sesión
+        })
+        .then(response => response.json())
+        .then(data => {
+            const tbody = document.getElementById('tasks-table-body');
+            tbody.innerHTML = ''; // limpiar loading
+            data.results.forEach(task => {
+                const assignedTo = task.assigned_to.map(u => u.username).join(', ');
+                const row = `
+                    <tr>
+                        <td>${task.title}</td>
+                        <td class="status-${task.status}">${task.status.replace('_', ' ')}</td>
+                        <td>${task.priority}</td>
+                        <td>${new Date(task.due_date).toLocaleDateString()}</td>
+                        <td>${task.created_by.username}</td>
+                        <td>${assignedTo}</td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            document.getElementById('tasks-table-body').innerHTML = '<tr><td colspan="6">Error loading tasks</td></tr>';
+        });
+    </script>
 </body>
 </html>

@@ -225,3 +225,7 @@ LOGGING = {
 
 # Set mi customed user as user by default
 AUTH_USER_MODEL = 'users.User'
+
+
+LOGIN_URL = '/login/'  # la URL de tu view de login frontend
+LOGIN_REDIRECT_URL = '/tasks/'  # a dónde redirigir después del login
