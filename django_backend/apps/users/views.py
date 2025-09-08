@@ -13,18 +13,15 @@ class UserLoginView(View):
         username = request.POST.get("username")
         password = request.POST.get("password")
 
-        api_url = "http://localhost:8000/api/auth/login/"
+        api_url = "http://localhost:8000/api/auth/token/"
         response = requests.post(api_url, data={"username": username, "password": password})
 
         if response.status_code == 200:
-            user = authenticate(request, username=username, password=password)
-            # # Aquí podrías guardar el token JWT o la cookie en la sesión de Django
-            # request.session["auth_token"] = response.json().get("token")
-            if user:
-                login(request, user)  # <— Esto crea la sesión
-                return redirect("tasks_list")
+            tokens = response.json()
+            access_token = tokens["access"]
+            request.session["access_token"] = access_token  # guardarlo en sesión
+            return redirect("/tasks/")
 
-        # Si falla, recargar el form con error
         return render(request, self.template_name, {"error": "Credenciales inválidas"})
     
 class UserLogoutView(View):

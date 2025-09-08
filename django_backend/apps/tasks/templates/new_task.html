@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>New Task</title>
+<style>
+body { font-family: Arial; background-color: #f5f5f5; padding: 20px; }
+.form-container { max-width: 500px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.1); }
+h2 { text-align: center; }
+.form-group { margin-bottom: 15px; }
+label { display: block; margin-bottom: 5px; }
+input, select, textarea { width: 100%; padding: 8px; box-sizing: border-box; }
+button { display: block; width: 100%; padding: 10px; background-color: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+button:hover { background-color: #2980b9; }
+.message { text-align: center; margin-bottom: 15px; }
+.message.success { color: green; }
+.message.error { color: red; }
+</style>
+</head>
+<body>
+<div class="form-container">
+<h2>Create New Task</h2>
+<div id="message"></div>
+<form id="newTaskForm">
+    <div class="form-group">
+        <label for="id_title">Title</label>
+        <input type="text" name="title" id="id_title" required>
+    </div>
+    <div class="form-group">
+        <label for="id_description">Description</label>
+        <textarea name="description" id="id_description" rows="4"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="id_status">Status</label>
+        <select name="status" id="id_status">
+            <option value="todo">To Do</option>
+            <option value="in_progress">In Progress</option>
+            <option value="done">Done</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="id_priority">Priority</label>
+        <select name="priority" id="id_priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="id_due_date">Due Date</label>
+        <input type="datetime-local" name="due_date" id="id_due_date" required>
+    </div>
+    <div class="form-group">
+        <label for="id_estimated_hours">Estimated Hours</label>
+        <input type="number" name="estimated_hours" id="id_estimated_hours" step="0.1">
+    </div>
+    <button type="submit">Create Task</button>
+</form>
+</div>
+
+<script>
+const accessToken = localStorage.getItem('access_token');
+if (!accessToken) window.location.href = '/login/';
+
+document.getElementById('newTaskForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // evita submit clásico
+
+    const payload = {
+        title: document.getElementById('id_title').value,
+        description: document.getElementById('id_description').value,
+        status: document.getElementById('id_status').value,
+        priority: document.getElementById('id_priority').value,
+        due_date: document.getElementById('id_due_date').value,
+        estimated_hours: document.getElementById('id_estimated_hours').value || 0
+    };
+
+    fetch('http://localhost:8000/api/tasks/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(res => {
+        if (res.status === 201) return res.json();
+        if (res.status === 401) {
+            localStorage.removeItem('access_token');
+            window.location.href = '/login/';
+        }
+        return res.json().then(err => { throw err; });
+    })
+    .then(data => {
+        document.getElementById('message').innerHTML = `<div class="message success">Task created successfully!</div>`;
+        document.getElementById('newTaskForm').reset();
+    })
+    .catch(err => {
+        console.error(err);
+        document.getElementById('message').innerHTML = `<div class="message error">${err.detail || 'Failed to create task'}</div>`;
+    });
+});
+</script>
+</body>
+</html>

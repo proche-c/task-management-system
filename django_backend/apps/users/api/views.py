@@ -1,3 +1,4 @@
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import viewsets, status
 from rest_framework.decorators import action, permission_classes
@@ -26,7 +27,12 @@ class AuthViewSet(viewsets.ViewSet):
         password = request.data.get("password")
         user = authenticate(request, username=username, password=password)
         if user:
-            login(request, user)  # crea la sesión en Django
+            # login(request, user)  # crea la sesión en Django
+            refresh = RefreshToken.for_user(user)
+            return Response({
+                "access": str(refresh.access_token),
+                "refresh": str(refresh),
+            })
             return Response({"message": "Login successful"})
         return Response({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
 
@@ -37,8 +43,15 @@ class AuthViewSet(viewsets.ViewSet):
 
     @action(detail=False, methods=["post"])
     def refresh(self, request):
-        # JWT
-        return Response({"message": "Token refreshed ()"})
+        refresh_token = request.data.get("refresh")
+        if not refresh_token:
+            return Response({"error": "Refresh token required"}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            refresh = RefreshToken(refresh_token)
+            access_token = refresh.access_token
+            return Response({"access": str(access_token)})
+        except Exception as e:
+            return Response({"error": "Invalid refresh token"}, status=status.HTTP_400_BAD_REQUEST)
     
 class UserViewSet(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
