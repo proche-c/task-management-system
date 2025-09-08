@@ -184,9 +184,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # *************************************************************************************
 
-# basic config of celery for redis
+# basic config of celery
 CELERY_BROKER_URL = 'redis://redis:6379/0'
 CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TIMEZONE = "UTC"
 
 # Loggin configuration
 
@@ -230,3 +234,7 @@ AUTH_USER_MODEL = 'users.User'
 
 LOGIN_URL = '/login/'  # la URL de tu view de login frontend
 LOGIN_REDIRECT_URL = '/tasks/'  # a dónde redirigir después del login
+
+# mail config
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+DEFAULT_FROM_EMAIL = "noreply@example.com"

@@ -7,6 +7,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from apps.tasks.models import Task, TaskAssignment
 from .serializers import TaskSerializer, CommentSerializer, TaskHistorySerializer
 from .pagination import TasksPagination
+from apps.tasks.tasks import send_task_notification
 
 class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.select_related('created_by', 'parent_task').prefetch_related('assigned_to', 'tags')
@@ -37,11 +38,19 @@ class TaskViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         # Asigna automáticamente el usuario autenticado como creador
-        serializer.save(created_by=self.request.user)
+        task = serializer.save(created_by=self.request.user)
+        send_task_notification.delay(task.id, "created")
 
     def perform_update(self, serializer):
         # Asignar usuario que hace la actualización
         instance = serializer.save(updated_by=self.request.user)
+        send_task_notification.delay(instance.id, "updated")
+
+    def perform_destroy(self, instance):
+        task_id = instance.id  # guardamos el id antes de borrar
+        instance.delete()       # borramos la tarea
+        send_task_notification.delay(task_id, "deleted")
+
 
     # POST /api/tasks/{id}/assign/
     @action(detail=True, methods=["post"])
