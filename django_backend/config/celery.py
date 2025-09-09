@@ -1,6 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 import os
 from celery import Celery
+from celery.schedules import crontab
 
 # Set Django settings module
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
@@ -25,3 +26,11 @@ app.conf.worker_task_log_format = '[%(levelname)s/%(processName)s] %(task_name)s
 
 # auto discover tasks at apps at INSTALLED_APPS
 app.autodiscover_tasks()
+
+# celery beat conf
+app.conf.beat_schedule = {
+    'daily_task_summary': {
+        'task': 'apps.tasks.tasks.generate_daily_summary',
+        'schedule': crontab(hour=6, minute=0),
+    },
+}

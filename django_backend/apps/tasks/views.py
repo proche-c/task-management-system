@@ -5,7 +5,21 @@ from django.contrib import messages
 import requests
 from apps.tasks.models import Task
 
-class TaskListView(View):  
+class TaskListView(View):
+    """
+    View to display the list of tasks.
+
+    - If the user is authenticated in Django:
+        - Retrieves tasks using the ORM with `select_related` and `prefetch_related`.
+        - Renders 'tasks_list.html' with the retrieved tasks.
+
+    - If the user is not authenticated in Django but has a JWT in session:
+        - Makes a request to the internal task API using the access token.
+        - Renders 'tasks_list.html' with the tasks data from the API.
+
+    - If no valid user or token is present:
+        - Redirects to the login page.
+    """
     template_name = "tasks_list.html"
 
     def get(self, request):
@@ -33,6 +47,18 @@ class TaskListView(View):
         return redirect("login")
     
 class NewTaskView(LoginRequiredMixin, View):
+    """
+    View to create a new task.
+
+    GET:
+        - Renders 'new_task.html' template with a task creation form.
+
+    POST:
+        - Collects task data from the submitted form.
+        - Creates a new Task object in the database.
+        - Displays a success message.
+        - Redirects to the task list page.
+    """
     template_name = "new_task.html"
 
     def get(self, request):
@@ -60,51 +86,14 @@ class NewTaskView(LoginRequiredMixin, View):
         return redirect("tasks_list")  
 
 
-# class NewTaskView(View):
-#     template_name = "new_task.html"
-
-#     def get(self, request):
-#         tasks = Task.objects.select_related("created_by").prefetch_related("assigned_to")
-#         return render(request, self.template_name, {"tasks": tasks})
-
-#     def post(self, request):
-#         # Capturamos los datos del formulario
-#         title = request.POST.get("title")
-#         description = request.POST.get("description")
-#         status = request.POST.get("status")
-#         priority = request.POST.get("priority")
-#         due_date = request.POST.get("due_date")
-#         estimated_hours = request.POST.get("estimated_hours")
-
-#         # Endpoint de la API
-#         api_url = "http://localhost:8000/api/tasks/"
-
-#         # Data que enviaremos al endpoint
-#         payload = {
-#             "title": title,
-#             "description": description,
-#             "status": status,
-#             "priority": priority,
-#             "due_date": due_date,
-#             "estimated_hours": estimated_hours
-#         }
-
-#         # Hacer POST usando la cookie de sesión para autenticación
-#         session = requests.Session()
-#         for key, value in request.COOKIES.items():
-#             session.cookies.set(key, value)
-
-#         response = session.post(api_url, json=payload)
-
-#         if response.status_code in (200, 201):
-#             # Task creada correctamente
-#             return render(request, self.template_name, {"success": "Task created successfully"})
-#         else:
-#             # Error al crear
-#             error_msg = response.json().get("detail") or "Failed to create task"
-#             return render(request, self.template_name, {"error": error_msg})
-
 class TaskDetailView(LoginRequiredMixin, View):
+    """
+    View to display the details of a single task.
+
+    GET:
+        - Fetches the task by ID using `get_object_or_404`.
+        - Renders 'task_detail.html' template with the task data.
+    """
     template_name = "task_detail.html"
 
     def get(self, request, task_id):

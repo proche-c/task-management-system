@@ -51,7 +51,7 @@ urlpatterns = [
     path('tasks/', TaskListView.as_view(), name='tasks_list'),
     path('new_task/', NewTaskView.as_view(), name='new_task'),
     path('tasks/<int:task_id>/', TaskDetailView.as_view(), name='task_detail'),
-    path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    path('swagger.<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
