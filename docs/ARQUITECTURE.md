@@ -26,16 +26,16 @@ The system is fully containerized using **Docker Compose**, orchestrating multip
 ### 4. Celery Workers
 - Process background jobs such as:
   - Sending task notifications.
-  - Generating daily summaries. AÑADIR SI DA TIEMPO!!!!!
-  - Checking overdue tasks. AÑADIR SI DA TIEMPO!!!!!
-  - Cleaning up archived tasks. AÑADIR SI DA TIEMPO!!!!!
-- Allows expensive operations to run outside the main request/response cycle. AÑADIR SI DA TIEMPO!!!!!
+  - Generating daily summaries. 
+  - Checking overdue tasks. 
+  - Cleaning up archived tasks. 
+
 
 ### 5. Celery Beat
 - Scheduler that periodically triggers background jobs:
-  - Daily summaries. AÑADIR SI DA TIEMPO!!!!!
-  - Hourly overdue checks. AÑADIR SI DA TIEMPO!!!!!
-  - Weekly cleanup of archived tasks. AÑADIR SI DA TIEMPO!!!!!
+  - Daily summaries. 
+  - Hourly overdue checks. 
+  - Weekly cleanup of archived tasks. 
 
 ### 6. Adminer
 - Simple web-based database client.
@@ -56,3 +56,4 @@ The application runs with a single command:
 
 ```bash
 docker-compose up
+```
