@@ -1,16 +1,39 @@
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import viewsets, status
 from rest_framework.decorators import action, permission_classes
 from rest_framework.response import Response
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth import get_user_model
 from .serializers import RegisterSerializer, UserSerializer
 from .pagination import UsersPagination
 
 User = get_user_model()
 
 class AuthViewSet(viewsets.ViewSet):
+    """
+    ViewSet for handling user authentication.
+
+    Provides endpoints for:
+    - register: Register a new user.
+        Expects:username, email, password,  password2
+        Returns:
+            - 201 with user data if successful
+            - 400 with validation errors if invalid
+    - login: Authenticate a user and return JWT tokens.
+        Expects:username, password
+        Returns:
+            - 200 with access and refresh tokens if credentials are valid
+            - 401 if credentials are invalid    
+    - logout: Log out the current user.
+        Returns:
+            - 200 with success message
+    - refresh: Refresh an access token using a valid refresh token.
+        Expects: refresh (the refresh token string)
+        Returns:
+            - 200 with new access token if refresh is valid
+            - 400 if refresh token is missing or invalid
+    """
     permission_classes = []
 
     @action(detail=False, methods=["post"], permission_classes=[AllowAny])
@@ -27,13 +50,11 @@ class AuthViewSet(viewsets.ViewSet):
         password = request.data.get("password")
         user = authenticate(request, username=username, password=password)
         if user:
-            # login(request, user)  # crea la sesión en Django
             refresh = RefreshToken.for_user(user)
             return Response({
                 "access": str(refresh.access_token),
                 "refresh": str(refresh),
             })
-            return Response({"message": "Login successful"})
         return Response({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
 
     @action(detail=False, methods=["post"])
@@ -54,6 +75,24 @@ class AuthViewSet(viewsets.ViewSet):
             return Response({"error": "Invalid refresh token"}, status=status.HTTP_400_BAD_REQUEST)
     
 class UserViewSet(viewsets.ViewSet):
+    """
+    ViewSet for managing users.
+
+    Requires authentication for all endpoints.  
+    Provides endpoints for:
+    - list: Listing users with pagination
+        Returns: a paginated list of users with their team info.
+    - retrieve: Retrieving a single user by ID
+        Retrieve details of a specific user by ID.
+        Returns: user data if found, otherwise 404.
+    - update: Updating a user
+        Expects: full user data (not partial).  
+        Returns: updated user data or validation errors.
+    - me: Retrieving the currently authenticated user
+        Retrieve details of the currently authenticated user.
+        Returns: user data with team info.
+    """
+
     permission_classes = [IsAuthenticated]
     pagination_class = UsersPagination
 
