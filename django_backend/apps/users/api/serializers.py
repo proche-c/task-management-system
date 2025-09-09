@@ -1,19 +1,45 @@
-# from apps.users.models import User
 from django.contrib.auth.password_validation import validate_password
-from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from rest_framework import serializers
 
+# Gets the user by default set on settings.py
 User = get_user_model()
 
 class   UserSerializer(serializers.ModelSerializer):
+    """
+    Serializer for User model.
+
+    Converts User model instances into JSON representations and validates input
+    for updating or retreiving user information.
+
+    Fields:
+        id (int): Primary key of the user.
+        username (str): Username of the user.
+        email (str): Email address of the user.
+        team (Team): Associated team of the user (nullable).
+    """
     class Meta:
         model = User
-        fields = ['pk', 'username', 'email', 'team']
-        # extra_kwargs = {
-        #     "password": {"write_only": True}  # evita que se devuelva el password en las respuestas
-        # }
+        fields = ['id', 'username', 'email', 'team']
+
 
 class RegisterSerializer(serializers.ModelSerializer):
+    """
+    Serializer for registering new users.
+
+    Handles user creation with password validation and password confirmation.
+
+    Fields:
+        id (int): Primary key of the new user.
+        username (str): Username of the new user.
+        email (str): Email address of the new user.
+        password (str): Password for the new user (write-only).
+        password2 (str): Password confirmation (write-only).    
+
+    Methods:
+        validate: Ensures that password and password2 math and validates password strength.
+        create: Creates and saves a new User instance with hashed password. 
+    """
     password = serializers.CharField(write_only=True)
     password2 = serializers.CharField(write_only=True)
 
