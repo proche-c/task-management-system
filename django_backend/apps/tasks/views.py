@@ -2,20 +2,42 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 import requests
+from apps.tasks.models import Task
 
-class TaskListView(LoginRequiredMixin, View):
-    template_name = "tasks_list.html"  # ruta a tu template
+class TaskListView(View):  # no forzamos LoginRequiredMixin para manejar JWT fallback
+    template_name = "tasks_list.html"
 
     def get(self, request):
-        # No necesitamos pasar las tareas desde aquí, el JS del template hará fetch a la API
-        return render(request, self.template_name)
+        # 1using ORM
+        if request.user.is_authenticated:
+            tasks = Task.objects.select_related('created_by', 'parent_task').prefetch_related('assigned_to', 'tags').all()
+            return render(request, self.template_name, {"tasks": tasks})
+
+        # if useer is not authenticated in Django, use API with JWT
+        access = request.session.get("access_token")
+        if access:
+            api_url = f"{request.scheme}://{request.get_host()}/api/tasks/"
+            try:
+                resp = requests.get(api_url, headers={"Authorization": f"Bearer {access}"}, timeout=5)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    tasks_json = data.get("results", data) 
+                    return render(request, self.template_name, {"tasks_json": tasks_json})
+                else:
+                    request.session.pop("access_token", None)
+                    return redirect("login")
+            except requests.RequestException:
+                return render(request, self.template_name, {"error": "Could not fetch tasks from API."})
+
+        return redirect("login")
 
 
 class NewTaskView(View):
     template_name = "new_task.html"
 
     def get(self, request):
-        return render(request, self.template_name)
+        tasks = Task.objects.select_related("created_by").prefetch_related("assigned_to")
+        return render(request, self.template_name, {"tasks": tasks})
 
     def post(self, request):
         # Capturamos los datos del formulario

@@ -63,7 +63,7 @@ const accessToken = localStorage.getItem('access_token');
 if (!accessToken) window.location.href = '/login/';
 
 document.getElementById('newTaskForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // evita submit clásico
+    e.preventDefault();
 
     const payload = {
         title: document.getElementById('id_title').value,

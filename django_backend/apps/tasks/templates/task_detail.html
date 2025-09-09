@@ -60,7 +60,7 @@ button:hover { background-color: #2980b9; }
 const accessToken = localStorage.getItem('access_token');
 if (!accessToken) window.location.href = '/login/';
 
-const taskId = '{{ task_id }}'; // Injectado por Django
+const taskId = '{{ task_id }}';
 
 fetch(`http://localhost:8000/api/tasks/${taskId}/`, {
     method: 'GET',
