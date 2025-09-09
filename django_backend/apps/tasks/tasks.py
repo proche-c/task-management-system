@@ -1,3 +1,4 @@
+from datetime import timedelta
 from celery import shared_task
 from django.utils import timezone
 from django.core.mail import send_mail
@@ -58,4 +59,33 @@ def generate_daily_summary():
         else:
             print(f"No email for user {user.username}")
 
-generate_daily_summary.delay()
+@shared_task
+def check_overdue_tasks():
+    """Mark tasks as overdue and notify assignees"""
+    now = timezone.now()
+    overdue_tasks = Task.objects.filter(due_date__lt=now).exclude(status='completed')
+
+    for task in overdue_tasks:
+        if task.status != 'overdue':
+            task.status = 'overdue'
+            task.save(update_fields=['status'])
+
+        for user in task.assigned_to.all():
+            if user.email:
+                send_mail(
+                    subject=f"Task Overdue: {task.title}",
+                    message=f"The task '{task.title}' was due on {task.due_date.strftime('%Y-%m-%d %H:%M')} and is now overdue.",
+                    from_email="noreply@example.com",
+                    recipient_list=[user.email],
+                )
+
+@shared_task
+def cleanup_archived_tasks():
+    """
+    Delete archived tasks older than 30 days.
+    """
+    cutoff_date = timezone.now() - timedelta(days=30)
+    old_archived_tasks = Task.objects.filter(is_archived=True, updated_at__lt=cutoff_date)
+    old_archived_tasks.delete()
+
+    return f"Archived tasks older than 30 days were deleted."

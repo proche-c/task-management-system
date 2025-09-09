@@ -33,4 +33,8 @@ app.conf.beat_schedule = {
         'task': 'apps.tasks.tasks.generate_daily_summary',
         'schedule': crontab(hour=6, minute=0),
     },
+    'hourly_overdue_check': {
+        'task': 'apps.tasks.tasks.check_overdue_tasks',
+        'schedule': crontab(minute=0),
+    },
 }
